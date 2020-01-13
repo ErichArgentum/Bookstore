@@ -16,52 +16,57 @@ try {
 } catch (\PDOException $e) {
      throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-
 //var_dump($_GET);
-
-$title= $_GET['title'];
-$year= $_GET['year'];
+$title = $_GET['title'];
+$year = $_GET['year'];
 $stmt = $pdo->prepare('SELECT title, first_name, last_name, release_date, authors.id
 FROM books
-LEFT JOIN book_authors ON books.id=book_authors.book_id 
-LEFT JOIN authors ON authors.id=book_authors.author_id 
-WHERE title LIKE :title AND release_date=:year');
-$stmt->execute(['title'=> '%' . $title . '%', 'year' => $year]); 
+LEFT JOIN book_authors ON books.id=book_authors.book_id
+LEFT JOIN authors ON authors.id=book_authors.author_id
+WHERE title LIKE :title AND release_date= :year');
+$stmt->execute (['title'=> '%' . $title . '%', 'year' => $year]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
-        <body>
-    </head>
     <h1>Otsing</h1>
-    <form action="index.php" method="get">
-        <input type="text" name="title" placeholder="Pealkiri" style="margin: 4px">
-        <br>
-        <form action="index.php" method="get">
-        <input type="text" name="year" placeholder="Aasta" style="margin: 4px">
-        <br>
-        <input type="submit" value="Otsi" >
-            
-    </form>
-    <head>
-    <ul>
     <?php
+    require_once 'db_connection.php';
+    $year = $_GET['year'];
+    $title = $_GET['title'];
+    
+    ?>
 
-while ($row = $stmt->fetch())
-{
- //  var_dump($row); 
-echo '<li>' . $row['title'].' <a href="author.php">'.$row['first_name'].' '.$row['last_name'] . "</a></li> ";
-}
+
+    <form action="index.php" method="get">
+       
+        <input type='text' name='title' style="background-color: blue" placeholder='Pealkiri'>
+        <br>
+        <input type='text' name='year' placeholder='Aasta'>
+        <br>
+        <input type='submit' value='Otsi'>
+    </form>
+    <ul>
+
+
+
+<?php
+    $stmt = $pdo->prepare('SELECT * FROM books WHERE release_date LIKE :year AND title LIKE :title');
+    $stmt->execute(['year' => '%' . $year . '%', 'title' => '%' . $title . '%']);
+    
+    echo '<ul>';
+    while ( $row = $stmt->fetch() ) {
+        echo '<li><a href="book.php?id=' . $row['id'] . '">' . $row['title'] . '</a></li>';
+    }
+    echo '</ul>';
 ?>
-<a href="url"></a>
-<ul>
-        </body>
-</html> 
-
-
-
-
+    </ul>
+</body>
+</html>
