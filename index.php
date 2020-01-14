@@ -33,25 +33,29 @@ $stmt->execute (['title'=> '%' . $title . '%', 'year' => $year]);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <form action="index.php" method="get">
+  
+  <div class="topnav">
+    <input type='text' name='title'  placeholder='Pealkiri'>   
+    <input type='text' name='year' placeholder='Aasta'>   
+    <input type='submit' value='Otsi'>
+    <div>
 </head>
 <body>
 
-    <h1>Otsing</h1>
+    <h1>BOOKS DATABASE</h1>
     <?php
     require_once 'db_connection.php';
     $year = $_GET['year'];
     $title = $_GET['title'];
     
     ?>
-
-
     <form action="index.php" method="get">
-       
-        <input type='text' name='title' style="background-color: blue" placeholder='Pealkiri'>
-        <br>
-        <input type='text' name='year' placeholder='Aasta'>
-        <br>
-        <input type='submit' value='Otsi'>
+    <html>
+
+    <div>
+
     </form>
     <ul>
 

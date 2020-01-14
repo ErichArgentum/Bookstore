@@ -5,7 +5,10 @@ $stmt = $pdo->prepare('SELECT * FROM Books.books b LEFT JOIN book_authors ba ON 
 LEFT JOIN authors a ON ba.author_id = a.id WHERE b.id = :id');
 $stmt->execute(['id' => $id]);
 $book = $stmt->fetch();
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +16,15 @@ $book = $stmt->fetch();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $book['title']; ?></title>
+
+    
+    
 </head>
 <body>
+<a href="delete.php?id=<?php echo $id;  ?>">DELETE</a>
+<a href="edit.php?id=<?php echo $id;  ?>">EDIT</a>
 <br>
-<?php echo $book['title']; ?>  
+<?php  echo $book['title']; ?>  
 <br>
 <?php echo $book['release_date']; ?>  
 <br>
