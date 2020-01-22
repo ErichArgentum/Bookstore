@@ -22,6 +22,8 @@ $book = $stmt->fetch();
 </head>
 <body>
 <a href="delete.php?id=<?php echo $id;  ?>">DELETE</a>
+<br>
+<br>
 <a href="edit.php?id=<?php echo $id;  ?>">EDIT</a>
 <br>
 <?php  echo $book['title']; ?>  
