@@ -31,20 +31,27 @@ $stmt->execute (['title'=> '%' . $title . '%', 'year' => $year]);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+
+    <div class="b">
+    <h1>BOOKS DATABASE</h1>
+    <div>
+
     <form action="index.php" method="get">
   
-  <div class="topnav">
+  <div class="container">
     <input type='text' name='title'  placeholder='Pealkiri'>   
-    <input type='text' name='year' placeholder='Aasta'>   
+    <input type='text' name='year' placeholder='Aasta'>  
+    <div> 
+    <div class="button">
     <input type='submit' value='Otsi'>
     <div>
 </head>
 <body>
 
-    <h1>BOOKS DATABASE</h1>
     <?php
     require_once 'db_connection.php';
     $year = $_GET['year'];
@@ -72,5 +79,21 @@ $stmt->execute (['title'=> '%' . $title . '%', 'year' => $year]);
     echo '</ul>';
 ?>
     </ul>
+
+
+
+
+
+
+    <div class="search">
+  <input type="search" class="search-box" />
+  <span class="search-button">
+    <span class="search-icon"></span>
+  </span>
+  <script> $('.search-button').click(function(){
+  $(this).parent().toggleClass('open');
+}); 
+<script>
+</div>
 </body>
 </html>
